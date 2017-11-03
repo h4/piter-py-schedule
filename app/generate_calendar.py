@@ -1,8 +1,11 @@
 import datetime
 import requests
+from pytz import timezone
 from icalendar import Calendar, Event
 
 from lxml import html
+
+tz = timezone('Europe/Moscow')
 
 
 def parse_time(time_str):
@@ -14,7 +17,7 @@ def parse_time(time_str):
 
 def get_ts(col, date):
     times = "".join(col.itertext()).strip().replace('\xa0', ' ').split(' - ')
-    return [datetime.datetime.combine(date, parse_time(t)) for t in times]
+    return [datetime.datetime.combine(date, parse_time(t), tzinfo=tz) for t in times]
 
 
 def process_row(cal, date, row):
