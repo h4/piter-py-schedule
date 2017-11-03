@@ -1,6 +1,6 @@
 from flask import Flask, Response
 
-from generate_calendar import generate
+from .generate_calendar import generate
 
 app = Flask(__name__)
 
